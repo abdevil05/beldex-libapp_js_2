@@ -1,24 +1,26 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-add_compile_definitions(MYMONERO_CORE_CUSTOM)
+add_compile_definitions(BELDEX_CORE_CUSTOM)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 project(MyMoneroLibAppCpp)
 #
 include_directories("src")
 #
-set(MYMONERO_LIBAPP_CPP "src/submodules/mymonero-libapp-cpp")
+set(MYMONERO_LIBAPP_CPP "src/submodules/beldex-libapp-cpp")
 set(MYMONERO_LIBAPP_CPP_SRC "${MYMONERO_LIBAPP_CPP}/src")
 include_directories("${MYMONERO_LIBAPP_CPP_SRC}")
 include_directories("${MYMONERO_LIBAPP_CPP_SRC}/SendFunds/Controllers")
 #
-set(MYMONERO_CORE_CPP "${MYMONERO_LIBAPP_CPP_SRC}/mymonero-core-cpp")
+set(MYMONERO_CORE_CPP "${MYMONERO_LIBAPP_CPP_SRC}/beldex-core-cpp")
 set(MYMONERO_CORE_CPP_SRC "${MYMONERO_CORE_CPP}/src")
 include_directories("${MYMONERO_CORE_CPP_SRC}")
 #
-set(MONERO_SRC "${MYMONERO_CORE_CPP}/contrib/monero-core-custom")
+set(MONERO_SRC "${MYMONERO_CORE_CPP}/contrib/beldex-core-custom")
 include_directories(${MONERO_SRC})
+include_directories("${MONERO_SRC}/external")
+include_directories("${MONERO_SRC}/external/loki-mq")
 include_directories("${MONERO_SRC}/epee/include")
 include_directories("${MONERO_SRC}/common")
 include_directories("${MONERO_SRC}/vtlogger")
@@ -73,9 +75,13 @@ set(
     ${MONERO_SRC}/cryptonote_basic/cryptonote_basic_impl.cpp
     ${MONERO_SRC}/cryptonote_basic/cryptonote_format_utils.h
     ${MONERO_SRC}/cryptonote_basic/cryptonote_format_utils.cpp
-    ${MONERO_SRC}/cryptonote_basic/cryptonote_format_utils_basic.cpp
+    ${MONERO_SRC}/cryptonote_basic/cryptonote_basic.cpp
     ${MONERO_SRC}/crypto/crypto.cpp
     ${MONERO_SRC}/crypto/hash.c
+    ${MONERO_SRC}/crypto/cn_heavy_hash_hard_arm.cpp
+    ${MONERO_SRC}/crypto/cn_heavy_hash_hard_intel.cpp
+    ${MONERO_SRC}/crypto/cn_heavy_hash_soft.cpp
+    ${MONERO_SRC}/crypto/cn_turtle_hash.c
     ${MONERO_SRC}/crypto/slow-hash-dummied.cpp
     ${MONERO_SRC}/crypto/oaes_lib.c
     ${MONERO_SRC}/crypto/crypto-ops.c
@@ -98,8 +104,11 @@ set(
     ${MONERO_SRC}/common/threadpool.cpp
     ${MONERO_SRC}/common/aligned.c
     ${MONERO_SRC}/common/util.cpp
+    ${MONERO_SRC}/common/i18n.cpp
+    ${MONERO_SRC}/common/string_util.cpp
     ${MONERO_SRC}/epee/src/hex.cpp
     ${MONERO_SRC}/epee/src/string_tools.cpp
+    ${MONERO_SRC}/epee/src/portable_storage.cpp
     ${MONERO_SRC}/epee/src/memwipe.c
     ${MONERO_SRC}/epee/src/mlocker.cpp
     ${MONERO_SRC}/epee/src/wipeable_string.cpp
@@ -110,8 +119,6 @@ set(
     ${MONERO_SRC}/ringct/rctCryptoOps.c
     ${MONERO_SRC}/ringct/rctSigs.cpp
     ${MONERO_SRC}/ringct/bulletproofs.cc
-    ${MONERO_SRC}/ringct/bulletproofs_plus.cc
-    ${MONERO_SRC}/ringct/bulletproofs_plus.h
     ${MONERO_SRC}/ringct/multiexp.cc
     ${MONERO_SRC}/mnemonics/electrum-words.cpp
     ${MONERO_SRC}/vtlogger/logger.cpp
