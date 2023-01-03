@@ -61,11 +61,11 @@ namespace emscr_SendFunds_bridge
 	void send_app_handler__error_msg(const string &err_msg);
 	void send_app_handler__error_code(
 		SendFunds::PreSuccessTerminalCode code,
-		optional<string> msg,
-		optional<CreateTransactionErrorCode> createTx_errCode,
+		boost::optional<string> msg,
+		boost::optional<CreateTransactionErrorCode> createTx_errCode,
 		// for display / information purposes on errCode=needMoreMoneyThanFound during step1:
-		optional<uint64_t> spendable_balance,
-		optional<uint64_t> required_balance
+		boost::optional<uint64_t> spendable_balance,
+		boost::optional<uint64_t> required_balance
 	);
 }
 
