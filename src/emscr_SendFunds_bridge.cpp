@@ -39,7 +39,7 @@
 #include <unordered_map>
 #include <memory>
 //
-#include "string_tools.h"
+#include "epee/string_tools.h"
 #include "wallet_errors.h"
 //
 #include "serial_bridge_utils.hpp"
@@ -94,11 +94,11 @@ void emscr_SendFunds_bridge::send_app_handler__error_msg(const string &err_msg)
 }
 void emscr_SendFunds_bridge::send_app_handler__error_code(
 	SendFunds::PreSuccessTerminalCode code,
-	optional<string> msg,
-	optional<CreateTransactionErrorCode> createTx_errCode,
+	boost::optional<string> msg,
+	boost::optional<CreateTransactionErrorCode> createTx_errCode,
 	// for display / information purposes on errCode=needMoreMoneyThanFound during step1:
-	optional<uint64_t> spendable_balance,
-	optional<uint64_t> required_balance
+	boost::optional<uint64_t> spendable_balance,
+	boost::optional<uint64_t> required_balance
 ) {
 	boost::property_tree::ptree root;
 	root.put(ret_json_key__any__err_code(), code);
@@ -234,10 +234,10 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 		},
 		[] ( // failure_fn
 			SendFunds::PreSuccessTerminalCode code,
-			optional<string> msg,
-			optional<CreateTransactionErrorCode> createTx_errCode,
-			optional<uint64_t> spendable_balance,
-			optional<uint64_t> required_balance
+			boost::optional<string> msg,
+			boost::optional<CreateTransactionErrorCode> createTx_errCode,
+			boost::optional<uint64_t> spendable_balance,
+			boost::optional<uint64_t> required_balance
 		) -> void {
 			send_app_handler__error_code(code, msg, createTx_errCode, spendable_balance, required_balance);
 		},
