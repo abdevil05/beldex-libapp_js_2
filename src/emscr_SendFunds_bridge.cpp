@@ -329,6 +329,7 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 		req_params_root.put("address", std::move(req_params.address));
 		req_params_root.put("view_key", std::move(req_params.view_key));
 		req_params_root.put("tx", std::move(req_params.tx));
+		req_params_root.put("fee", std::move(req_params.priority));
 		stringstream req_params_ss;
 		boost::property_tree::write_json(req_params_ss, req_params_root, false/*pretty*/);
 		auto req_params_string = req_params_ss.str();
