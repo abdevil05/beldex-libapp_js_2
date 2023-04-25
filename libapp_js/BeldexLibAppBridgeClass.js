@@ -30,7 +30,7 @@ const MyMoneroCoreBridgeEssentialsClass = require('../mymonero-core-js/monero_ut
 const MyMoneroBridge_utils = require('../mymonero-core-js/monero_utils/MyMoneroBridge_utils')
 const nettype_utils = require("../mymonero-core-js/cryptonote_utils/nettype");
 //
-class MyMoneroLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
+class BeldexLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
 {
 	constructor(this_Module)
 	{
@@ -263,4 +263,4 @@ class MyMoneroLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
 
 	}
 }
-module.exports = MyMoneroLibAppBridgeClass;
+module.exports = BeldexLibAppBridgeClass;

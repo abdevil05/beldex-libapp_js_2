@@ -51,8 +51,8 @@ using namespace boost;
 using namespace SendFunds;
 //
 using namespace serial_bridge_utils;
-using namespace monero_send_routine;
-using namespace monero_transfer_utils;
+using namespace beldex_send_routine;
+using namespace beldex_transfer_utils;
 using namespace emscr_SendFunds_bridge;
 //
 // Runtime - Memory

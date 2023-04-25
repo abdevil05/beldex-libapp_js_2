@@ -189,7 +189,7 @@ describe("sendingFunds tests", function()
 	        const destinations = [{to_address: target_address, send_amount: entered_amount}]
 		var bridge_instance;
 		try {
-			bridge_instance = await require('../libapp_js/MyMoneroLibAppBridge')({ asmjs: undefined/*allow it to detect*/ });
+			bridge_instance = await require('../libapp_js/BeldexLibAppBridge')({ asmjs: undefined/*allow it to detect*/ });
 		} catch (e) {
 			console.error(e);
 			return;
