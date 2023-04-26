@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2019, MyMonero.com
-//
+// Copyright (c)      2023, The Beldex Project
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -72,7 +72,7 @@ module.exports = function(options)
 				// have to check != "/" b/c webpack (I think) replaces __dirname
 				pathTo_cryptonoteUtilsDir = "file://" + __dirname + "/" // prepending "file://" because it's going to try to stream it
 			} else { // actual web browser
-				pathTo_cryptonoteUtilsDir = this_scriptDirectory + `/mymonero_libapp_js/libapp_js/` // this works for the MyMonero browser build, and is quite general, at least
+				pathTo_cryptonoteUtilsDir = this_scriptDirectory + `/beldex_libapp_js/libapp_js/` // this works for the MyMonero browser build, and is quite general, at least
 			}
 			fullPath = pathTo_cryptonoteUtilsDir + filename
 		}
@@ -138,7 +138,7 @@ module.exports = function(options)
 			} else {
 				throw "Unsupported environment - please implement file reading for asmjs fallback case"
 			}
-			const filepath = locateFile("MyMoneroLibAppCpp_ASMJS.asm.js", scriptDirectory)
+			const filepath = locateFile("BeldexLibAppCpp_ASMJS.asm.js", scriptDirectory)
 			const content = read_fn(filepath)
 			// TODO: verify content - for now, relying on same-origin and tls/ssl
 			var Module = {}
@@ -152,7 +152,7 @@ module.exports = function(options)
 			{ // "delaying even 1ms is enough to allow compilation memory to be reclaimed"
 				Module_template['asm'] = Module['asm']
 				Module = null
-				resolve(new BeldexLibAppBridgeClass(require("./MyMoneroLibAppCpp_ASMJS")(Module_template)))
+				resolve(new BeldexLibAppBridgeClass(require("./BeldexCpp_ASMJS")(Module_template)))
 			}, 1) 
 		}
 	});
