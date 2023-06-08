@@ -1,7 +1,7 @@
 //
 //  emscr_async_bridge_index.cpp
 //  Copyright (c) 2014-2019, MyMonero.com
-//
+// Copyright (c)      2023, The Beldex Project
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are
@@ -51,8 +51,8 @@ using namespace boost;
 using namespace SendFunds;
 //
 using namespace serial_bridge_utils;
-using namespace monero_send_routine;
-using namespace monero_transfer_utils;
+using namespace beldex_send_routine;
+using namespace beldex_transfer_utils;
 using namespace emscr_SendFunds_bridge;
 //
 // Runtime - Memory

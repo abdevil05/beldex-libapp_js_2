@@ -1,10 +1,10 @@
 
-var MyMoneroLibAppCpp = (() => {
+var BeldexLibAppCpp = (() => {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
   if (typeof __filename !== 'undefined') _scriptDir = _scriptDir || __filename;
   return (
-function(MyMoneroLibAppCpp) {
-  MyMoneroLibAppCpp = MyMoneroLibAppCpp || {};
+function(BeldexLibAppCpp) {
+  BeldexLibAppCpp = BeldexLibAppCpp || {};
 
 
 
@@ -21,7 +21,7 @@ function(MyMoneroLibAppCpp) {
 // after the generated code, you will need to define   var Module = {};
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
-var Module = typeof MyMoneroLibAppCpp != 'undefined' ? MyMoneroLibAppCpp : {};
+var Module = typeof BeldexLibAppCpp != 'undefined' ? BeldexLibAppCpp : {};
 
 // See https://caniuse.com/mdn-javascript_builtins_object_assign
 
@@ -1008,7 +1008,7 @@ function createExportWrapper(name, fixedasm) {
 }
 
 var wasmBinaryFile;
-  wasmBinaryFile = 'MyMoneroLibAppCpp_WASM.wasm';
+  wasmBinaryFile = 'BeldexLibAppCpp_WASM.wasm';
   if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
   }
@@ -1192,15 +1192,15 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  375932: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__error(JS__req_params); },  
- 376113: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__success(JS__req_params); },  
- 376296: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__status_update(JS__req_params); },  
- 376485: () => { Module.fromCpp__SendFundsFormSubmission__willBeginSending({}); },  
- 376552: () => { Module.fromCpp__SendFundsFormSubmission__canceled({}); },  
- 376611: () => { Module.fromCpp__SendFundsFormSubmission__authenticate(); },  
- 376672: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__get_unspent_outs(JS__req_params); },  
- 376864: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__get_random_outs(JS__req_params); },  
- 377055: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__submit_raw_tx(JS__req_params); }
+  376220: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__error(JS__req_params); },  
+ 376401: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__success(JS__req_params); },  
+ 376584: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__status_update(JS__req_params); },  
+ 376773: () => { Module.fromCpp__SendFundsFormSubmission__willBeginSending({}); },  
+ 376840: () => { Module.fromCpp__SendFundsFormSubmission__canceled({}); },  
+ 376899: () => { Module.fromCpp__SendFundsFormSubmission__authenticate(); },  
+ 376960: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__get_unspent_outs(JS__req_params); },  
+ 377152: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__get_random_outs(JS__req_params); },  
+ 377343: ($0) => { const JS__req_params_string = Module.UTF8ToString($0); const JS__req_params = JSON.parse(JS__req_params_string); Module.fromCpp__SendFundsFormSubmission__submit_raw_tx(JS__req_params); }
 };
 
 
@@ -7155,13 +7155,13 @@ Module['ready'] = new Promise(function (resolve, reject) {
   })
 })
 
-  return MyMoneroLibAppCpp.ready
+  return BeldexLibAppCpp.ready
 }
 );
 })();
 if (typeof exports === 'object' && typeof module === 'object')
-  module.exports = MyMoneroLibAppCpp;
+  module.exports = BeldexLibAppCpp;
 else if (typeof define === 'function' && define['amd'])
-  define([], function() { return MyMoneroLibAppCpp; });
+  define([], function() { return BeldexLibAppCpp; });
 else if (typeof exports === 'object')
-  exports["MyMoneroLibAppCpp"] = MyMoneroLibAppCpp;
+  exports["BeldexLibAppCpp"] = BeldexLibAppCpp;
