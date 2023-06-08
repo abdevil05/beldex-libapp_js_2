@@ -1,6 +1,6 @@
-[submodule "src/submodules/mymonero-libapp-cpp"]
-	path = src/submodules/mymonero-libapp-cpp
-	url = https://github.com/mymonero/mymonero-libapp-cpp
 [submodule "mymonero-core-js"]
 	path = mymonero-core-js
 	url = https://github.com/mymonero/mymonero-core-js
+[submodule "src/submodules/beldex-libapp-cpp"]
+	path = src/submodules/beldex-libapp-cpp
+	url = https://github.com/Beldex-Coin/beldex-libapp-cpp.git

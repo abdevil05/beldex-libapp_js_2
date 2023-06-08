@@ -128,7 +128,7 @@ function tests(Module)
 	}
 	{
 		console.time("estimated_tx_network_fee")
-		const args_str = '{"fee_per_b":"24658","priority":"1"}'
+		const args_str = '{"fee_per_b":"666","fee_per_o":"100000","priority":"1"}'
 		const ret_string = Module.estimated_tx_network_fee(args_str)
 		console.timeEnd("estimated_tx_network_fee")
 		console.log("estimated_tx_network_fee ret", ret_string)
@@ -142,7 +142,7 @@ function tests(Module)
 	}
 }
 console.time("Load module")
-require('../libapp_js/MyMoneroLibAppBridge')({asmjs: false}).then(function(instance) // this can be switched to manually test asmjs vs wasm - can be exposed to option
+require('../libapp_js/BeldexLibAppBridge')({asmjs: false}).then(function(instance) // this can be switched to manually test asmjs vs wasm - can be exposed to option
 {	
 	console.timeEnd("Load module")
 	console.log("Loaded instance")

@@ -1,7 +1,7 @@
 //
 //  emscr_async_bridge_index.hpp
 //  Copyright (c) 2014-2019, MyMonero.com
-//
+// Copyright (c)      2023, The Beldex Project
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are
@@ -43,7 +43,7 @@ namespace emscr_SendFunds_bridge
 	using namespace std;
 	using namespace boost;
 	using namespace cryptonote;
-	using namespace monero_transfer_utils;
+	using namespace beldex_transfer_utils;
 	//
 	// Bridging Functions - these take and return JSON strings plus unique ids that are used internally for matching up calls from C++ to JS over emscripten, with the cbs that will fulfill the promises and futures being used to coordinate e.g. async routines like send_funds.
 	//
@@ -61,11 +61,11 @@ namespace emscr_SendFunds_bridge
 	void send_app_handler__error_msg(const string &err_msg);
 	void send_app_handler__error_code(
 		SendFunds::PreSuccessTerminalCode code,
-		optional<string> msg,
-		optional<CreateTransactionErrorCode> createTx_errCode,
+		boost::optional<string> msg,
+		boost::optional<CreateTransactionErrorCode> createTx_errCode,
 		// for display / information purposes on errCode=needMoreMoneyThanFound during step1:
-		optional<uint64_t> spendable_balance,
-		optional<uint64_t> required_balance
+		boost::optional<uint64_t> spendable_balance,
+		boost::optional<uint64_t> required_balance
 	);
 }
 

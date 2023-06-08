@@ -1,7 +1,7 @@
 //
 //  emscr_async_bridge_index.cpp
 //  Copyright (c) 2014-2019, MyMonero.com
-//
+// Copyright (c)      2023, The Beldex Project
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are
@@ -39,7 +39,7 @@
 #include <unordered_map>
 #include <memory>
 //
-#include "string_tools.h"
+#include "epee/string_tools.h"
 #include "wallet_errors.h"
 //
 #include "serial_bridge_utils.hpp"
@@ -51,8 +51,8 @@ using namespace boost;
 using namespace SendFunds;
 //
 using namespace serial_bridge_utils;
-using namespace monero_send_routine;
-using namespace monero_transfer_utils;
+using namespace beldex_send_routine;
+using namespace beldex_transfer_utils;
 using namespace emscr_SendFunds_bridge;
 //
 // Runtime - Memory
@@ -94,11 +94,11 @@ void emscr_SendFunds_bridge::send_app_handler__error_msg(const string &err_msg)
 }
 void emscr_SendFunds_bridge::send_app_handler__error_code(
 	SendFunds::PreSuccessTerminalCode code,
-	optional<string> msg,
-	optional<CreateTransactionErrorCode> createTx_errCode,
+	boost::optional<string> msg,
+	boost::optional<CreateTransactionErrorCode> createTx_errCode,
 	// for display / information purposes on errCode=needMoreMoneyThanFound during step1:
-	optional<uint64_t> spendable_balance,
-	optional<uint64_t> required_balance
+	boost::optional<uint64_t> spendable_balance,
+	boost::optional<uint64_t> required_balance
 ) {
 	boost::property_tree::ptree root;
 	root.put(ret_json_key__any__err_code(), code);
@@ -234,10 +234,10 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 		},
 		[] ( // failure_fn
 			SendFunds::PreSuccessTerminalCode code,
-			optional<string> msg,
-			optional<CreateTransactionErrorCode> createTx_errCode,
-			optional<uint64_t> spendable_balance,
-			optional<uint64_t> required_balance
+			boost::optional<string> msg,
+			boost::optional<CreateTransactionErrorCode> createTx_errCode,
+			boost::optional<uint64_t> spendable_balance,
+			boost::optional<uint64_t> required_balance
 		) -> void {
 			send_app_handler__error_code(code, msg, createTx_errCode, spendable_balance, required_balance);
 		},
@@ -329,6 +329,7 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 		req_params_root.put("address", std::move(req_params.address));
 		req_params_root.put("view_key", std::move(req_params.view_key));
 		req_params_root.put("tx", std::move(req_params.tx));
+		req_params_root.put("fee", std::move(req_params.priority));
 		stringstream req_params_ss;
 		boost::property_tree::write_json(req_params_ss, req_params_root, false/*pretty*/);
 		auto req_params_string = req_params_ss.str();
