@@ -42,6 +42,8 @@ set(
     #
     src/emscr_SendFunds_bridge.hpp
     src/emscr_SendFunds_bridge.cpp
+    src/walletf2.h
+
     #
     ${BELDEX_CORE_CPP_SRC}/beldex_address_utils.hpp
     ${BELDEX_CORE_CPP_SRC}/beldex_address_utils.cpp
@@ -141,8 +143,6 @@ set (
 -s DEMANGLE_SUPPORT=1 \
 -s ALLOW_MEMORY_GROWTH=1 \
 -s NO_DISABLE_EXCEPTION_CATCHING \
--s NODEJS_CATCH_EXIT=1 \
--s NODEJS_CATCH_REJECTION=0 \
 -s ERROR_ON_UNDEFINED_SYMBOLS=1 \
 -s LLD_REPORT_UNDEFINED \
 -s RESERVED_FUNCTION_POINTERS=5 \
@@ -152,6 +152,8 @@ set (
 --memory-init-file 1 \
 --post-js ${CMAKE_CURRENT_LIST_DIR}/src/module-post.js \
 ")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 message(STATUS "EMCC_LINKER_FLAGS__WASM ${EMCC_LINKER_FLAGS__WASM}")
 #

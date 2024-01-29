@@ -144,6 +144,15 @@ string send_funds(const string &args_string)
         return serial_bridge_utils::error_ret_json_from_message(e.what());
     }
 }
+string register_funds(const string &args_string)
+{
+    try {
+        emscr_SendFunds_bridge::register_funds(args_string);
+        return string("{}");
+    } catch (std::exception &e) {
+        return serial_bridge_utils::error_ret_json_from_message(e.what());
+    }
+}
 string send_cb__authentication(const string &args_string)
 {
     try {
@@ -216,6 +225,7 @@ EMSCRIPTEN_BINDINGS(my_module)
     //
     //
     emscripten::function("send_funds", &send_funds);
+    emscripten::function("register_funds", &register_funds);
     emscripten::function("send_cb__authentication", &send_cb__authentication);
     emscripten::function("send_cb_I__got_unspent_outs", &send_cb_I__got_unspent_outs);
     emscripten::function("send_cb_II__got_random_outs", &send_cb_II__got_random_outs);

@@ -35,8 +35,14 @@
 //
 #include <string>
 #include <boost/optional.hpp>
+
 #include "cryptonote_config.h" 
 #include "SendFundsFormSubmissionController.hpp"
+#include "walletf2.h"
+#include "master_node_list.h"
+#include "tx_construction_data.h"
+#include "cryptonote_tx_utils.h"
+
 //
 namespace emscr_SendFunds_bridge
 {
@@ -51,6 +57,7 @@ namespace emscr_SendFunds_bridge
 	//
 	// Public interface:
 	void send_funds(const string &args_string);
+	register_master_node_result register_funds(const string &args_string);
 	void send_cb__authentication(const string &args_string);
 	void send_cb_I__got_unspent_outs(const string &args_string);
 	void send_cb_II__got_random_outs(const string &args_string);
