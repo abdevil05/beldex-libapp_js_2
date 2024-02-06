@@ -36,6 +36,7 @@
 #include "serial_bridge_index.hpp"
 #include "serial_bridge_utils.hpp"
 #include "emscr_SendFunds_bridge.hpp"
+
 //
 
 string decode_address(const string address, const string nettype)

@@ -47,6 +47,7 @@
 #include "SendFundsFormSubmissionController.hpp"
 #include "beldex_economy.h"
 
+
 // #include "walletf2.h"
 // #include "wallet2.h" // this header file cannot be include as it uses cpr as submodule that is responsible for calling rpc
 
@@ -350,9 +351,9 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 	(*controller_ptr).handle();
 }
 //
- register_master_node_result emscr_SendFunds_bridge::register_funds(const string &args_string)
+register_master_node_result emscr_SendFunds_bridge::register_funds(const string &args_string)
 {
-    
+
 	std::vector<std::string> local_args;
 	local_args.push_back(args_string);
 
@@ -576,6 +577,7 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 	// }
 
 	// assert(result.status != register_master_node_result_status::invalid);
+	result.args_string = args_string;
 	return result;
 
 	// const operator_fee_k = 'value2'; // Replace with the desired key
@@ -619,7 +621,7 @@ void emscr_SendFunds_bridge::send_funds(const string &args_string)
 	{
 		// (it will already have thrown an exception)
 		send_app_handler__error_msg(error_ret_json_from_message("Invalid JSON"));
-		return result ;
+		return result;
 	}
 
 	const auto &destinations = json_root.get_child("destinations");

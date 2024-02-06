@@ -33,15 +33,19 @@
 #ifndef emscr_async_bridge_index_hpp
 #define emscr_async_bridge_index_hpp
 //
+
 #include <string>
 #include <boost/optional.hpp>
 
 #include "cryptonote_config.h" 
 #include "SendFundsFormSubmissionController.hpp"
 #include "walletf2.h"
-#include "master_node_list.h"
 #include "tx_construction_data.h"
 #include "cryptonote_tx_utils.h"
+#include "cryptonote_basic.h"
+#include "master_node_list.h"
+
+
 
 //
 namespace emscr_SendFunds_bridge

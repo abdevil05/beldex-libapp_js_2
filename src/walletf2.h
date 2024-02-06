@@ -1,3 +1,4 @@
+#pragma once
 
 #include <cstdint>
 #include <vector>
@@ -15,12 +16,14 @@
 #include "tx_construction_data.h"
 
 
-
-constexpr std::array<const char *const, 6> allowed_priority_strings = {{"default", "unimportant", "normal", "elevated", "priority", "flash"}};
+// constexpr std::array<const char *const, 6> allowed_priority_strings = {{"default", "unimportant", "normal", "elevated", "priority", "flash"}};
 
 // static const char *tr(const char *str) { return i18n_translate(str, "emscr_SendFunds_bridge::register_funds"); }
-static std::map<std::string,std::string> i18n_entries;
+// static std::map<std::string, std::string> i18n_entries;
 using pending_tx = wallet::pending_tx;
+bool parse_priority          (const std::string& arg, uint32_t& priority);
+inline std::map<std::string, std::string> i18n_entries;
+
 
 enum struct register_master_node_result_status
 {
@@ -52,21 +55,22 @@ struct register_master_node_result
   register_master_node_result_status status;
   std::string msg;
   pending_tx ptx;
+  std::string args_string;
 };
 
-bool parse_priority(const std::string &arg, uint32_t &priority)
-{
-  auto priority_pos = std::find(
-      allowed_priority_strings.begin(),
-      allowed_priority_strings.end(),
-      arg);
-  if (priority_pos != allowed_priority_strings.end())
-  {
-    priority = std::distance(allowed_priority_strings.begin(), priority_pos);
-    return true;
-  }
-  return false;
-}
+// bool parse_priority(const std::string &arg, uint32_t &priority)
+// {
+//   auto priority_pos = std::find(
+//       allowed_priority_strings.begin(),
+//       allowed_priority_strings.end(),
+//       arg);
+//   if (priority_pos != allowed_priority_strings.end())
+//   {
+//     priority = std::distance(allowed_priority_strings.begin(), priority_pos);
+//     return true;
+//   }
+//   return false;
+// }
 
 enum tx_priority
 {
@@ -79,18 +83,17 @@ enum tx_priority
   tx_priority_last
 };
 
-const char *i18n_translate(const char *s, const std::string &context)
+inline const char *i18n_translate(const char *s, const std::string &context)
 {
   const std::string key = context + "\0"s + s;
-  std::map<std::string,std::string>::const_iterator i = i18n_entries.find(key);
+  std::map<std::string, std::string>::const_iterator i = i18n_entries.find(key);
   if (i == i18n_entries.end())
     return s;
   return (*i).second.c_str();
 }
 
-cryptonote::network_type m_nettype;
-cryptonote::network_type nettype()  { return m_nettype; }
-
+static cryptonote::network_type m_nettype;
+static cryptonote::network_type nettype() { return m_nettype; }
 
 struct tx_construction_data
 {
@@ -102,11 +105,9 @@ struct tx_construction_data
   uint64_t unlock_time;
   rct::RCTConfig rct_config;
   std::vector<cryptonote::tx_destination_entry> dests; // original setup, does not include change
-  uint32_t subaddr_account;   // subaddress account of your wallet to be used in this transfer
-  std::set<uint32_t> subaddr_indices;  // set of address indices used as inputs in this transfer
+  uint32_t subaddr_account;                            // subaddress account of your wallet to be used in this transfer
+  std::set<uint32_t> subaddr_indices;                  // set of address indices used as inputs in this transfer
 
-  uint8_t            hf_version;
+  uint8_t hf_version;
   cryptonote::txtype tx_type;
 };
-
-
