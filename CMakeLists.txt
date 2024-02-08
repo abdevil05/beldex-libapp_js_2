@@ -6,32 +6,8 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 project(BeldexLibAppCpp)
 
+
 #
-# set(PKG_CONFIG_EXECUTABLE "/usr/lib/x86_64-linux-gnu/pkgconfig")
-
-# if(NOT TARGET sodium)
-# # Allow -D DOWNLOAD_SODIUM=FORCE to download without even checking for a local libsodium
-#   option(DOWNLOAD_SODIUM "Allow libsodium to be downloaded and built locally if not found on the system" OFF)
-#   if(NOT DOWNLOAD_SODIUM STREQUAL "FORCE" AND NOT BUILD_STATIC_DEPS)
-#     find_package(PkgConfig REQUIRED)
-#     pkg_check_modules(SODIUM libsodium>=1.0.9 IMPORTED_TARGET)
-#   endif()
-
-#   add_library(sodium INTERFACE)
-#   if(SODIUM_FOUND AND NOT DOWNLOAD_SODIUM STREQUAL "FORCE" AND NOT BUILD_STATIC_DEPS)
-#     target_link_libraries(sodium INTERFACE PkgConfig::SODIUM)
-#   else()
-#     if(NOT DOWNLOAD_SODIUM AND NOT BUILD_STATIC_DEPS)
-#       message(FATAL_ERROR "Could not find libsodium >= 1.0.9; either install it on your system or use -DDOWNLOAD_SODIUM=ON to download and build an internal copy")
-#     endif()
-#     message(STATUS "Sodium >= 1.0.9 not found, but DOWNLOAD_SODIUM specified, so downloading it")
-#     include(DownloadLibSodium)
-#     target_link_libraries(sodium INTERFACE sodium_vendor)
-#   endif()
-
-#   # Need this target export so that loki-mq properly picks up sodium
-#   export(TARGETS sodium NAMESPACE sodium:: FILE sodium-exports.cmake)
-# endif()
 
 
 
@@ -134,6 +110,7 @@ set(
     ${BELDEX_SRC}/crypto/skein.c
     ${BELDEX_SRC}/cryptonote_core/cryptonote_tx_utils.cpp
     ${BELDEX_SRC}/cryptonote_core/master_node_list.cpp
+    ${BELDEX_SRC}/cryptonote_core/master_node_rules.cpp
     ${BELDEX_SRC}/common/base58.cpp
     ${BELDEX_SRC}/common/threadpool.cpp
     ${BELDEX_SRC}/common/aligned.c
@@ -193,20 +170,11 @@ set (
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 
-set(CMAKE_PREFIX_PATH "/usr/include/sodium")
-# set(sodium_DIR "/usr/include/sodium")
-set(sodium_DIR "/usr/lib/x86_64-linux-gnu/pkgconfig")
-
-
-find_package(sodium REQUIRED)
-
-
-
 message(STATUS "EMCC_LINKER_FLAGS__WASM ${EMCC_LINKER_FLAGS__WASM}")
 #
 add_executable(BeldexLibAppCpp_WASM ${SRC_FILES})
 
-target_link_libraries(BeldexLibAppCpp_WASM PRIVATE sodium)
+
 
 #
 set_target_properties(BeldexLibAppCpp_WASM PROPERTIES COMPILE_FLAGS "-s USE_BOOST_HEADERS=1" LINK_FLAGS "${EMCC_LINKER_FLAGS__WASM}")

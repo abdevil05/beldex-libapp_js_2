@@ -19,9 +19,6 @@
 constexpr std::array<const char *const, 6> allowed_priority_strings = {{"default", "unimportant", "normal", "elevated", "priority", "flash"}};
 
 
-
-
-
 bool parse_priority(const std::string &arg, uint32_t &priority)
 {
   auto priority_pos = std::find(

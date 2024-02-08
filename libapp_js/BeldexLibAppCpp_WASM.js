@@ -876,65 +876,41 @@ function dbg(text) {
 }
 
 var ASM_CONSTS = {
- 377792: $0 => {
+ 375760: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__error(JS__req_params);
  },
- 377973: $0 => {
+ 375941: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__success(JS__req_params);
  },
- 378156: $0 => {
+ 376124: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__status_update(JS__req_params);
  },
- 378345: () => {
+ 376313: () => {
   Module.fromCpp__SendFundsFormSubmission__willBeginSending({});
  },
- 378412: () => {
+ 376380: () => {
   Module.fromCpp__SendFundsFormSubmission__canceled({});
  },
- 378471: () => {
+ 376439: () => {
   Module.fromCpp__SendFundsFormSubmission__authenticate();
  },
- 378532: $0 => {
+ 376500: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__get_unspent_outs(JS__req_params);
  },
- 378724: $0 => {
+ 376692: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__get_random_outs(JS__req_params);
  },
- 378915: $0 => {
-  const JS__req_params_string = Module.UTF8ToString($0);
-  const JS__req_params = JSON.parse(JS__req_params_string);
-  Module.fromCpp__SendFundsFormSubmission__submit_raw_tx(JS__req_params);
- },
- 379104: () => {
-  Module.fromCpp__SendFundsFormSubmission__willBeginSending({});
- },
- 379171: () => {
-  Module.fromCpp__SendFundsFormSubmission__canceled({});
- },
- 379230: () => {
-  Module.fromCpp__SendFundsFormSubmission__authenticate();
- },
- 379291: $0 => {
-  const JS__req_params_string = Module.UTF8ToString($0);
-  const JS__req_params = JSON.parse(JS__req_params_string);
-  Module.fromCpp__SendFundsFormSubmission__get_unspent_outs(JS__req_params);
- },
- 379483: $0 => {
-  const JS__req_params_string = Module.UTF8ToString($0);
-  const JS__req_params = JSON.parse(JS__req_params_string);
-  Module.fromCpp__SendFundsFormSubmission__get_random_outs(JS__req_params);
- },
- 379674: $0 => {
+ 376883: $0 => {
   const JS__req_params_string = Module.UTF8ToString($0);
   const JS__req_params = JSON.parse(JS__req_params_string);
   Module.fromCpp__SendFundsFormSubmission__submit_raw_tx(JS__req_params);
@@ -6330,6 +6306,17 @@ var dynCall_iiiiijj = Module["dynCall_iiiiijj"] = createExportWrapper("dynCall_i
 
 var dynCall_iiiiiijj = Module["dynCall_iiiiiijj"] = createExportWrapper("dynCall_iiiiiijj");
 
+function invoke_iiii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  return getWasmTableEntry(index)(a1, a2, a3);
+ } catch (e) {
+  stackRestore(sp);
+  if (!(e instanceof EmscriptenEH)) throw e;
+  _setThrew(1, 0);
+ }
+}
+
 function invoke_vii(index, a1, a2) {
  var sp = stackSave();
  try {
@@ -6389,17 +6376,6 @@ function invoke_viiiiii(index, a1, a2, a3, a4, a5, a6) {
  var sp = stackSave();
  try {
   getWasmTableEntry(index)(a1, a2, a3, a4, a5, a6);
- } catch (e) {
-  stackRestore(sp);
-  if (!(e instanceof EmscriptenEH)) throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_iiii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  return getWasmTableEntry(index)(a1, a2, a3);
  } catch (e) {
   stackRestore(sp);
   if (!(e instanceof EmscriptenEH)) throw e;
