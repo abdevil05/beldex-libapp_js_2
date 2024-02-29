@@ -249,7 +249,7 @@ class BeldexLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
 			args.resolvedPaymentID = fn_args.resolvedPaymentID;
 		}
 		const args_str = JSON.stringify(args, null, '')
-		const ret_string = this.Module.send_funds(args_str);
+		const ret_string = this.Module.send_amount(args_str);
 		const ret = JSON.parse(ret_string);
 		if (typeof ret.err_msg !== 'undefined' && ret.err_msg) { // this is actually an exception
 			errHandler_fn({ 
@@ -262,7 +262,7 @@ class BeldexLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
 		}
 
 	}
-	async__register_funds(fn_args)
+	async async__register_funds(fn_args)
 	{
 		const self = this;
 		// register cb handler fns to wait for calls with thi task id
@@ -430,6 +430,8 @@ class BeldexLibAppBridgeClass extends MyMoneroCoreBridgeEssentialsClass
 			return;
 		} else {
 			// TODO: assert Object.keys(ret).length == 0
+
+			return ret;
 		}
 
 	}

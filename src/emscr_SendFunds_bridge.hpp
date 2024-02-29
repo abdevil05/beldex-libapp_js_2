@@ -55,13 +55,13 @@ namespace emscr_SendFunds_bridge
 	using namespace cryptonote;
 	using namespace beldex_transfer_utils;
 	//
-	// Bridging Functions - these take and return JSON strings plus unique ids that are used internally for matching up calls from C++ to JS over emscripten, with the cbs that will fulfill the promises and futures being used to coordinate e.g. async routines like send_funds.
+	// Bridging Functions - these take and return JSON strings plus unique ids that are used internally for matching up calls from C++ to JS over emscripten, with the cbs that will fulfill the promises and futures being used to coordinate e.g. async routines like send_amount.
 	//
 	// To use these functions, the appropriate emscripten-side JS fn handlers must exist, which must be hooked up to perform the e.g. networking or transport requests they are specced to perform, then upon the async completion of those requests, call the appropate "cb_I+"-named function to allow the internal evaluation of the routine entrypoint to complete.
 	//
 	// Public interface:
-	void send_funds(const string &args_string);
-	register_master_node_result register_funds(const string &args_string);
+	void send_amount(const string &args_string);
+	std::vector<std::string> register_funds(const string &args_string);
 	void send_cb__authentication(const string &args_string);
 	void send_cb_I__got_unspent_outs(const string &args_string);
 	void send_cb_II__got_random_outs(const string &args_string);

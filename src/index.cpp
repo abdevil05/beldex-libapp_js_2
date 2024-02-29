@@ -136,10 +136,10 @@ string generate_key_image(const string txPublicKey, const string privateViewKey,
     }
 }
 //
-string send_funds(const string &args_string)
+string send_amount(const string &args_string)
 {
     try {
-        emscr_SendFunds_bridge::send_funds(args_string);
+        emscr_SendFunds_bridge::send_amount(args_string);
         return string("{}");
     } catch (std::exception &e) {
         return serial_bridge_utils::error_ret_json_from_message(e.what());
@@ -148,12 +148,26 @@ string send_funds(const string &args_string)
 string register_funds(const string &args_string)
 {
     try {
-        emscr_SendFunds_bridge::register_funds(args_string);
-        return string("{}");
+        // Call the emscr_SendFunds_bridge::register_funds function
+        vector<string> extracted_values = emscr_SendFunds_bridge::register_funds(args_string);
+
+        // Convert the vector of strings to a JSON string
+        stringstream ss;
+        ss << "{";
+        for (size_t i = 0; i < extracted_values.size(); ++i) {
+            ss << "\"" << i << "\": \"" << extracted_values[i] << "\"";
+            if (i < extracted_values.size() - 1) {
+                ss << ",";
+            }
+        }
+        ss << "}";
+        return ss.str();
     } catch (std::exception &e) {
+        // Handle exceptions and return an error JSON string
         return serial_bridge_utils::error_ret_json_from_message(e.what());
     }
 }
+
 string send_cb__authentication(const string &args_string)
 {
     try {
@@ -193,7 +207,7 @@ string send_cb_III__submitted_tx(const string &args_string)
 //
 EMSCRIPTEN_BINDINGS(my_module)
 { // C++ -> JS 
-    // emscripten::function("send_funds", &emscr_async_bridge::send_funds);
+    // emscripten::function("send_amount", &emscr_async_bridge::send_amount);
     // emscripten::function("send_cb_I__got_unspent_outs", &emscr_async_bridge::send_cb_I__got_unspent_outs);
     // emscripten::function("send_cb_II__got_random_outs", &emscr_async_bridge::send_cb_II__got_random_outs);
     // emscripten::function("send_cb_III__submitted_tx", &emscr_async_bridge::send_cb_III__submitted_tx);
@@ -225,7 +239,7 @@ EMSCRIPTEN_BINDINGS(my_module)
     // emscripten::function("encrypt_payment_id", &serial_bridge::encrypt_payment_id);
     //
     //
-    emscripten::function("send_funds", &send_funds);
+    emscripten::function("send_amount", &send_amount);
     emscripten::function("register_funds", &register_funds);
     emscripten::function("send_cb__authentication", &send_cb__authentication);
     emscripten::function("send_cb_I__got_unspent_outs", &send_cb_I__got_unspent_outs);

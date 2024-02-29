@@ -15,15 +15,13 @@
 #include "pending_tx.h"
 #include "tx_construction_data.h"
 
-
 // constexpr std::array<const char *const, 6> allowed_priority_strings = {{"default", "unimportant", "normal", "elevated", "priority", "flash"}};
 
 // static const char *tr(const char *str) { return i18n_translate(str, "emscr_SendFunds_bridge::register_funds"); }
 // static std::map<std::string, std::string> i18n_entries;
 using pending_tx = wallet::pending_tx;
-bool parse_priority          (const std::string& arg, uint32_t& priority);
+bool parse_priority(const std::string &arg, uint32_t &priority);
 inline std::map<std::string, std::string> i18n_entries;
-
 
 enum struct register_master_node_result_status
 {
@@ -55,7 +53,20 @@ struct register_master_node_result
   register_master_node_result_status status;
   std::string msg;
   pending_tx ptx;
-  std::string args_string;
+  // std::string args_string;
+
+  // friend std::ostream &operator<<(std::ostream &os, const register_master_node_result &result)
+  // {
+  //   std::ostringstream ss;
+  //   ss << "Status: " << result.status << ", "
+  //      << "Message: " << result.msg << ", "
+  //      << "Pending TX: " /* Convert pending_tx to string if needed */ << ", "
+  //      << "Args String: " << result.args_string;
+  //   os << ss.str();
+  //   return os;
+  // }
+
+
 };
 
 // bool parse_priority(const std::string &arg, uint32_t &priority)
