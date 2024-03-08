@@ -189,7 +189,7 @@ void send_app_handler__success(const Success_RetVals &success_retVals)
 }
 //
 // From-JS function decls
-void emscr_SendFunds_bridge::send_amount(const string &args_string)
+void emscr_SendFunds_bridge::send_funds(const string &args_string)
 {
 	boost::property_tree::ptree json_root;
 	if (!parsed_json_root(args_string, json_root))
@@ -207,7 +207,7 @@ void emscr_SendFunds_bridge::send_amount(const string &args_string)
 	for (const auto &dest : destinations)
 	{
 		dest_addrs.emplace_back(dest.second.get<string>("to_address"));
-		dest_amounts.emplace_back(dest.second.get<string>("send_amount"));
+		dest_amounts.emplace_back(dest.second.get<string>("send_funds"));
 	}
 
 	Parameters parameters{
@@ -352,9 +352,16 @@ void emscr_SendFunds_bridge::send_amount(const string &args_string)
 //
 std::vector<std::string> emscr_SendFunds_bridge::register_funds(const string &args_string)
 {
+	std::istringstream iss(args_string);
 
 	std::vector<std::string> local_args;
-	local_args.push_back(args_string);
+
+	std::string token;
+
+	while (iss >> token)
+	{
+		local_args.push_back(token);
+	}
 
 	register_master_node_result result = {};
 	result.status = register_master_node_result_status::invalid;
@@ -639,7 +646,7 @@ std::vector<std::string> emscr_SendFunds_bridge::register_funds(const string &ar
 	for (const auto &dest : destinations)
 	{
 		dest_addrs.emplace_back(dest.second.get<string>("to_address"));
-		dest_amounts.emplace_back(dest.second.get<string>("send_amount"));
+		dest_amounts.emplace_back(dest.second.get<string>("send_funds"));
 	}
 
 	Parameters parameters{
